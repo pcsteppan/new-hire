@@ -1,11 +1,21 @@
 <template>
   <div id="app">
+    <icon-button name="edit"/>
+    <icon-button name="update"/>
+    <icon-button name="remove"/>
+    <icon-button name="add"/>
   </div>
 </template>
 
 <script>
+import IconButton from '@/components/IconButton.vue'
+
 export default {
-  name: 'app'
+  name: 'app',
+
+  components: {
+    IconButton
+  }
 }
 </script>
 
