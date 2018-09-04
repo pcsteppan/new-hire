@@ -25,9 +25,11 @@ export default {
 
 <style>
   .iconBtn {
-    height: 100%;
-    width: 100%;
     border: none;
     background: none;
+  }
+  .iconBtn > svg {
+    height: 100%;
+    width: 100%;
   }
 </style>

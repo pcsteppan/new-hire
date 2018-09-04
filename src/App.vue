@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <NewhireFormSection/>
+    <NewhireFormSection
+      v-on:addAssociate="addNewAssociate"
+    />
   </div>
 </template>
 
@@ -14,6 +16,30 @@ export default {
   components: {
     IconButton,
     NewhireFormSection
+  },
+  data: function () {
+    return {
+      associates: [],
+      nextAssociateId: 1
+    }
+  },
+  methods: {
+    addNewAssociate (newAssociateData) {
+      this.associates.push({
+        ...newAssociateData,
+        id: this.nextAssociateId++,
+        isExpanded: false
+      })
+      // this.saveAssociates()
+    }
+    // removeAssociate (x) {
+    //   this.associates.splice(x, 1);
+    //   this.saveAssociates();
+    // },
+    // saveAssociates() {
+    //   let parsed = JSON.stringify(this.associates)
+    //   localStorage.setItem('associates', parsed);
+    // }
   }
 }
 </script>
