@@ -1,52 +1,52 @@
 <template>
-  <form id="newhire-form" v-on:submit.prevent="$emit('addAssociate', associate)" class="smallcaps">
+  <form id="newhire-form" v-on:submit.prevent="$emit('addNewHire', newHire)" class="smallcaps">
     <div class="input">
       <label for="input-first-name">
         first name
       </label>
-      <input id="input-first-name" type="text" v-model="associate.firstName">
+      <input id="input-first-name" type="text" v-model="newHire.firstName">
     </div>
     <div class="input">
       <label for="input-last-name">
         last name
       </label>
-      <input id="input-last-name" type="text" v-model="associate.lastName">
+      <input id="input-last-name" type="text" v-model="newHire.lastName">
     </div>
     <div class="input">
       <label for="input-preferred-name">
         preferred name
       </label>
-      <input id="input-preferred-name" type="text" v-model="associate.preferredName">
+      <input id="input-preferred-name" type="text" v-model="newHire.preferredName">
     </div>
     <div class="input">
       <label for="input-job-title">
         job title
       </label>
-      <input id="input-job-title" type="text" v-model="associate.title">
+      <input id="input-job-title" type="text" v-model="newHire.title">
     </div>
     <div class="input">
       <label for="input-department-name">
         department
       </label>
-      <input id="input-department-name" type="text" v-model="associate.department">
+      <input id="input-department-name" type="text" v-model="newHire.department">
     </div>
     <div class="input">
       <label for="input-supervisor-name">
         supervisor
       </label>
-      <input id="input-supervisor-name" type="text" v-model="associate.supervisor">
+      <input id="input-supervisor-name" type="text" v-model="newHire.supervisor">
     </div>
     <div class="input input-description-container">
       <label for="input-description">
         description
       </label>
-      <textarea rows="4" class="input-description" v-model="associate.description"></textarea>
+      <textarea rows="4" class="input-description" v-model="newHire.description"></textarea>
     </div>
     <div class="input input-is-returning-container">
       <label for="input-is-returning">
-        returning associate
+        returning assocaite
       </label>
-      <input class="input-is-returning" type="checkbox" v-model="associate.isReturning">
+      <input class="input-is-returning" type="checkbox" v-model="newHire.isReturning">
     </div>
     <icon-button
       name="add"
@@ -65,7 +65,7 @@ export default {
 
   data () {
     return {
-      ASSOCIATE_TEMPLATE: {
+      NEW_HIRE_TEMPLATE: {
         firstName: '',
         lastName: '',
         preferredName: '',
@@ -75,14 +75,14 @@ export default {
         description: '',
         isReturning: false
       },
-      associate: {
-        ...this.ASSOCIATE_TEMPLATE
+      newHire: {
+        ...this.NEW_HIRE_TEMPLATE
       }
     }
   },
   methods: {
     reset () {
-      this.associate = { ...this.ASSOCIATE_TEMPLATE }
+      this.newHire = { ...this.NEW_HIRE_TEMPLATE }
     }
   }
 }

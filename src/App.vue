@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <NewhireFormSection
+    <NewHireFormSection
       v-on:addAssociate="addNewAssociate($event)"
     />
   </div>
 </template>
 
 <script>
-import NewhireFormSection from '@/components/NewhireFormSection.vue'
+import NewHireFormSection from '@/components/NewHireFormSection.vue'
 import IconButton from '@/components/IconButton.vue'
 
 export default {
@@ -15,19 +15,19 @@ export default {
 
   components: {
     IconButton,
-    NewhireFormSection
+    NewHireFormSection
   },
   data: function () {
     return {
-      associates: [],
-      nextAssociateId: 1
+      newHires: [],
+      nextNewHireId: 1
     }
   },
   methods: {
-    addNewAssociate (newAssociateData) {
-      this.associates.push({
-        ...newAssociateData,
-        id: this.nextAssociateId++,
+    addNewHire (newHireData) {
+      this.newHires.push({
+        ...newHireData,
+        id: this.nextNewHireId++,
         isExpanded: false
       })
       // this.saveAssociates()
