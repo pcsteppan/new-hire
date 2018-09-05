@@ -41,11 +41,11 @@
         <label for="input-description">
           description
         </label>
-        <textarea rows="4" class="input-description" v-model="newHire.description"></textarea>
+        <textarea rows="6" class="input-description" v-model="newHire.description"></textarea>
       </div>
       <div class="input input-is-returning-container">
         <label for="input-is-returning">
-          returning assocaite
+          returning associate
         </label>
         <input class="input-is-returning" type="checkbox" v-model="newHire.isReturning">
       </div>
@@ -91,6 +91,9 @@ export default {
 </script>
 
 <style scoped>
+.wrapper{
+  height: 100%;
+}
 .new-hire-form {
   width: 100%;
   height: 100%;
@@ -100,7 +103,7 @@ export default {
   position: relative;
   display: grid;
   grid-gap: 15px 10px;
-  grid-template-rows: 2fr 2fr 3fr 1fr;
+  grid-template-rows: auto auto 1fr auto;
   grid-template-columns: 1fr 1fr 1fr;
   background-color: white;
   z-index: 2;
@@ -122,7 +125,7 @@ export default {
 
 input,
 textarea{
-  width: 110px;
+  width: 100%;
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #1d44d4;
@@ -132,11 +135,11 @@ textarea{
 
 .input-description-container {
   grid-column: 1/4;
-  width: 350px;
+  width: 100%;
 }
 
 .input-description {
-  width: 350px;
+  width: 100%;
 }
 
 #input-button {

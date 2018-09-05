@@ -13,8 +13,11 @@
       />
     </section>
     <section class="preview--section">
-      <PreviewShow/>
+      <PreviewShow
+        :newHires=newHires
+      />
     </section>
+    <button @click="savePreviewOut"/>
   </div>
 </template>
 
@@ -53,6 +56,36 @@ export default {
     },
     removeNewHire (index) {
       this.newHires.splice(index, 1)
+    },
+    savePreviewOut () {
+      const data = document.getElementsByClassName('preview--section')[0].innerHTML
+      const formattedData = `<html xmlns="http://www.w3.org/1999/xhtml">
+                              <head>
+                                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                                <title></title>
+                              </head>
+                              <body style="margin: 0; padding: 0; width: 100% !important;">
+                                ${data}
+                              </body>
+                            </html>`
+      this.saveFile(formattedData, 'newhireannouncement', 'html')
+    },
+    saveFile (data, filename, type) {
+      let file = new Blob([data], { type: type })
+      if (window.navigator.msSaveOrOpenBlob) { // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename)
+      } else { // Others
+        let a = document.createElement('a')
+        let url = URL.createObjectURL(file)
+        a.href = url
+        a.download = filename
+        document.body.appendChild(a)
+        a.click()
+        setTimeout(function () {
+          document.body.removeChild(a)
+          window.URL.revokeObjectURL(url)
+        }, 0)
+      }
     }
     // removeAssociate (x) {
     //   this.associates.splice(x, 1);
@@ -74,9 +107,9 @@ export default {
 }
 
 html {
-  overflow: hidden;
   max-height: 100vh;
   max-width: 100vw;
+  overflow: hidden;
 }
 
 #app {
@@ -93,13 +126,16 @@ html {
 }
 
 .new-hires-list--section{
-  grid-area: list
+  grid-area: list;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 .new-hire-form--section{
-  grid-area: form
+  grid-area: form;
 }
 .preview--section{
-  grid-area: preview
+  grid-area: preview;
+  overflow-y: scroll;
 }
 
 .smallcaps {

@@ -1,6 +1,8 @@
 <template>
 <tr>
-  <td width="620" align="left" valign="top" style="background: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height:21px; color: #1e1e1e; text-align:left; padding-top:30px; padding-bottom:30px;border-top:1px solid #CCC;">
+  <td width="620" align="left" valign="top"
+    style="background: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height:21px; color: #1e1e1e; text-align:left; padding-top:30px; padding-bottom:30px;"
+    v-bind:style="isFirst ? 'border-top:0px;' : 'border-top:1px solid #CCC;'">
     <table width="620" border="0" cellspacing="0" cellpadding="0">
       <tbody>
         <tr>
@@ -9,7 +11,7 @@
               <tbody>
                 <tr>
                   <td align="center" valign="top" style="background: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #1e1e1e; padding-top:4px;">
-                    <img v-bind:src="'http://www.americanhotel.com/images/banners/reps/300px/' + newHire.lastname + newHire.firstname + '.jpg'" width="155" height="155" alt="" style="display: block; font-size:13px; font-family: Arial, Helvetica, sans-serif; color:#1e1e1e;" border="0" />
+                    <img v-bind:src="'http://www.americanhotel.com/images/banners/reps/300px/' + newHire.lastName + newHire.firstName + '.jpg'" width="155" height="155" alt="" style="display: block; font-size:13px; font-family: Arial, Helvetica, sans-serif; color:#1e1e1e;" border="0" />
                   </td>
                 </tr>
                 <tr>
@@ -25,7 +27,7 @@
               <tbody>
                 <tr>
                   <td align="left" valign="top" style="background: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height:21px; color: #666666; text-align:left; padding-bottom:10px;">
-                    <span style="font-weight:bold">{{newHire.firstname}}<span v-if="newHire.preferredname">({{newHire.preferredname}})</span><span v-else>&nbsp;</span>{{newHire.lastname}}</span>
+                    <span style="font-weight:bold">{{newHire.firstName}}<span v-if="newHire.preferredName">({{newHire.preferredName}})</span><span v-else>&nbsp;</span>{{newHire.lastName}}</span>
                     <br />
                     {{newHire.title}} &ndash; {{newHire.department}}
                     <br />
@@ -53,6 +55,10 @@ export default {
     newHire: {
       required: true,
       type: Object
+    },
+    isFirst: {
+      required: true,
+      type: Boolean
     }
   }
 }

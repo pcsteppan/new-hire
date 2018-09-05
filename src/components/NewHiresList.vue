@@ -28,7 +28,6 @@ export default {
 
 <style scoped>
   .wrapper{
-    overflow-y: scroll;
     height: 100%;
   }
 </style>

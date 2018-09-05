@@ -63,7 +63,7 @@ export default {
   box-sizing: border-box;
   width: 400px;
   height: 200px;
-  padding: 25px;
+  padding: 10px 25px;
   display: grid;
   grid-gap: 10px 10px;
   grid-template-rows: 1fr 2fr 2fr 3fr 1fr;
@@ -84,12 +84,12 @@ export default {
 }
 
 input {
-  width: 110px;
+  width: 100%;
 }
 
 textarea {
   grid-column: 1/4;
-  width: 350px;
+  width: 100%;
 }
 
 .new-hire-li-nav>.name {
