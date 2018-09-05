@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <NewhireFormSection
-      v-on:addAssociate="addNewAssociate"
+      v-on:addAssociate="addNewAssociate($event)"
     />
   </div>
 </template>
