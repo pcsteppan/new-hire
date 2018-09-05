@@ -1,13 +1,22 @@
 <template>
   <div id="app">
-    <NewHireFormSection
-      v-on:addAssociate="addNewAssociate($event)"
-    />
+    <section class="new-hires-list--section">
+      <NewHiresList
+        :newHires = newHires
+        @update = "updateNewHireData($event)"
+      />
+    </section>
+    <section class="new-hire-form--section">
+      <NewHireForm
+        v-on:addNewHire = "addNewHire($event)"
+      />
+    </section>
   </div>
 </template>
 
 <script>
-import NewHireFormSection from '@/components/NewHireFormSection.vue'
+import NewHireForm from '@/components/NewHireForm.vue'
+import NewHiresList from '@/components/NewHiresList.vue'
 import IconButton from '@/components/IconButton.vue'
 
 export default {
@@ -15,7 +24,8 @@ export default {
 
   components: {
     IconButton,
-    NewHireFormSection
+    NewHireForm,
+    NewHiresList
   },
   data: function () {
     return {
@@ -31,6 +41,9 @@ export default {
         isExpanded: false
       })
       // this.saveAssociates()
+    },
+    updateNewHireData ({ data: newHireData, index }) {
+      this.newHires[index] = { ...newHireData }
     }
     // removeAssociate (x) {
     //   this.associates.splice(x, 1);
@@ -53,6 +66,8 @@ export default {
 
 html {
   overflow: hidden;
+  max-height: 100vh;
+  max-width: 100vw;
 }
 
 #app {
@@ -65,6 +80,22 @@ html {
   grid-template-rows: 1fr 320px;
   font-family: 'Open Sans', sans-serif;
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
+}
+
+.new-hires-list--section{
+  grid-column: 1;
+  grid-row: 1;
+  max-height: 100%;
+}
+.new-hire-form--section{
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.smallcaps {
+  font-size: 10px;
+  font-variant: small-caps;
+  color: #666;
 }
 </style>

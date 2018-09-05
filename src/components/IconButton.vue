@@ -1,5 +1,5 @@
 <template>
-  <button class="iconBtn" v-html="svgData[name]"/>
+  <button class="iconBtn" @click="$emit(name)" v-html="svgData[name]"/>
 </template>
 
 <script>
