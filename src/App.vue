@@ -12,6 +12,9 @@
         v-on:addNewHire = "addNewHire($event)"
       />
     </section>
+    <section class="preview--section">
+      <PreviewShow/>
+    </section>
   </div>
 </template>
 
@@ -19,6 +22,7 @@
 import NewHireForm from '@/components/NewHireForm.vue'
 import NewHiresList from '@/components/NewHiresList.vue'
 import IconButton from '@/components/IconButton.vue'
+import PreviewShow from '@/components/PreviewShow.vue'
 
 export default {
   name: 'app',
@@ -26,7 +30,8 @@ export default {
   components: {
     IconButton,
     NewHireForm,
-    NewHiresList
+    NewHiresList,
+    PreviewShow
   },
   data: function () {
     return {
@@ -75,26 +80,26 @@ html {
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Avenir',Helvetca, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   display: grid;
-  grid-template-columns: 400px minmax(700px, 1fr);
-  grid-template-rows: 1fr 320px;
+  grid-template:  "list preview" 1fr
+                  "form preview" 320px
+                  / 400px minmax(700px, 1fr);
   font-family: 'Open Sans', sans-serif;
   height: 100vh;
   /* overflow: hidden; */
 }
 
 .new-hires-list--section{
-  grid-column: 1;
-  grid-row: 1;
-  max-height: 100%;
+  grid-area: list
 }
 .new-hire-form--section{
-  grid-column: 1;
-  grid-row: 2;
+  grid-area: form
+}
+.preview--section{
+  grid-area: preview
 }
 
 .smallcaps {
