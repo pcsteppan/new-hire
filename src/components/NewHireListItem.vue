@@ -2,12 +2,12 @@
   <div>
     <div class="new-hire-li-nav" :class="{ expanded: newHire.isExpanded }">
       <div class="name">
-          <p>{{newHire.firstName + '&nbsp;' + newHire.lastName}}</p>
+          <p>{{pNewHire.firstName + '&nbsp;' + pNewHire.lastName}}</p>
         </div>
         <div class="btns">
           <icon-button name="edit" v-if="!newHire.isExpanded" @edit="newHire.isExpanded = true"/>
           <icon-button name="update" v-else @update="update"/>
-          <icon-button name="remove" @remove="$emit(remove)"/>
+          <icon-button name="remove" @remove="$emit('remove')"/>
         </div>
       </div>
       <div v-if="newHire.isExpanded" class="new-hire-li-card">

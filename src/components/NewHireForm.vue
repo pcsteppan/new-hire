@@ -119,11 +119,6 @@ export default {
   float: right;
   width: 16px;
 }
-.smallcaps {
-  font-size: 10px;
-  font-variant: small-caps;
-  color: #666;
-}
 
 input,
 textarea{

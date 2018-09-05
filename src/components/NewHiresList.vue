@@ -5,6 +5,7 @@
       :key=key
       :pNewHire=newHire
       @update="$emit('update', {data:$event, key})"
+      @remove="$emit('remove', key)"
     />
   </div>
 </template>

@@ -4,6 +4,7 @@
       <NewHiresList
         :newHires = newHires
         @update = "updateNewHireData($event)"
+        @remove = "removeNewHire($event)"
       />
     </section>
     <section class="new-hire-form--section">
@@ -42,8 +43,11 @@ export default {
       })
       // this.saveAssociates()
     },
-    updateNewHireData ({ data: newHireData, index }) {
-      this.newHires[index] = { ...newHireData }
+    updateNewHireData ({ data: newHireData, key: index }) {
+      this.newHires.splice(index, 1, { ...newHireData })
+    },
+    removeNewHire (index) {
+      this.newHires.splice(index, 1)
     }
     // removeAssociate (x) {
     //   this.associates.splice(x, 1);
