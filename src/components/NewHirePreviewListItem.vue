@@ -27,7 +27,7 @@
               <tbody>
                 <tr>
                   <td align="left" valign="top" style="background: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height:21px; color: #666666; text-align:left; padding-bottom:10px;">
-                    <span style="font-weight:bold">{{newHire.firstName}}<span v-if="newHire.preferredName">({{newHire.preferredName}})</span><span v-else>&nbsp;</span>{{newHire.lastName}}</span>
+                    <span style="font-weight:bold">{{newHire.firstName}}<span v-if="newHire.preferredName"> ({{newHire.preferredName}}) </span><span v-else>&nbsp;</span>{{newHire.lastName}}</span>
                     <br />
                     {{newHire.title}} &ndash; {{newHire.department}}
                     <br />

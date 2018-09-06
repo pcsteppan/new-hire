@@ -1,12 +1,12 @@
 <template>
-  <table class="wrapper">
+  <tr class="wrapper">
     <NewHirePreviewListItem
       v-for="(newHire, key) in newHires"
       :newHire=newHire
       :key=key
       :isFirst="(key===0)"
     />
-  </table>
+  </tr>
 </template>
 
 <script>
