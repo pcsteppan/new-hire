@@ -17,9 +17,8 @@
         :newHires=newHires
       />
     </section>
-    <button class="export--button smallcaps" @click="savePreviewOut">
-      save
-    </button>
+    <icon-button class="save--button" name='save' @save="savePreviewOut"/>
+    <icon-button class="io--button" name='io' type='file' @io="importFile($event)"/>
   </div>
 </template>
 
@@ -71,8 +70,9 @@ export default {
                               <body style="margin: 0; padding: 0; width: 100% !important;">
                                 ${data}
                               </body>
+                              <!--JSON${JSON.stringify(this.newHires)}-->
                             </html>`
-      this.saveFile(formattedData, 'newhireannouncement', 'html')
+      this.saveFile(formattedData, 'newhireannouncement.html', 'html')
     },
     saveFile (data, filename, type) {
       let file = new Blob([data], { type: type })
@@ -94,15 +94,13 @@ export default {
     saveLocal () {
       let parsed = JSON.stringify(this.newHires)
       localStorage.setItem('newHires', parsed)
+    },
+    importFile (fileList) {
+      const theFileReader = new FileReader()
+      const importedFile = fileList[0]
+      const data = theFileReader.readAsText(importedFile)
+      console.log(data)
     }
-    // removeAssociate (x) {
-    //   this.associates.splice(x, 1);
-    //   this.saveAssociates();
-    // },
-    // saveAssociates() {
-    //   let parsed = JSON.stringify(this.associates)
-    //   localStorage.setItem('associates', parsed);
-    // }
   },
   mounted () {
     if (localStorage.getItem('newHires')) {
@@ -160,12 +158,24 @@ textarea {
   grid-area: preview;
   overflow-y: scroll;
 }
-.export--button{
+.save--button, .io--button{
   position: absolute;
   top: 1em;
   right: 2em;
-  width: 4em;
-  height: 2em;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: #1d44d4 1px solid;
+  fill: #1d44d4;
+  border-radius: 50%;
+}
+
+.save--button > svg, .io--button > svg {
+  width: 24px;
+  height: 24px;
+}
+
+.io--button{
+  top:4em;
 }
 
 .smallcaps {

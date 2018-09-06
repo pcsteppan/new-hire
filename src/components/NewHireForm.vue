@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <form class="new-hire-form smallcaps" v-on:submit.prevent="$emit('addNewHire', newHire)">
+    <form class="new-hire-form smallcaps" v-on:submit.prevent="$emit('addNewHire', newHire); reset()">
       <div class="input">
         <label for="input-first-name">
           first name
