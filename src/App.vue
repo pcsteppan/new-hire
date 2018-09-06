@@ -17,7 +17,9 @@
         :newHires=newHires
       />
     </section>
-    <button @click="savePreviewOut"/>
+    <button class="export--button smallcaps" @click="savePreviewOut">
+      save
+    </button>
   </div>
 </template>
 
@@ -136,6 +138,13 @@ html {
 .preview--section{
   grid-area: preview;
   overflow-y: scroll;
+}
+.export--button{
+  position: absolute;
+  top: 1em;
+  right: 2em;
+  width: 4em;
+  height: 2em;
 }
 
 .smallcaps {
