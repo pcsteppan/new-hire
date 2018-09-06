@@ -129,17 +129,13 @@ textarea {
 }
 
 .input-is-returning-container {
-  grid-column: 3;
-}
-.input-is-returning-container>label {
-  float: left;
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .input-is-returning-container>input {
+  margin-left: 1em;
   width: 14px;
-  float: right;
-}
-.input-is-returning {
-  float: right;
-  width: 16px;
 }
 </style>

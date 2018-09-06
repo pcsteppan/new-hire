@@ -110,18 +110,14 @@ export default {
   z-index: 2;
 }
 .input-is-returning-container {
-  grid-column: 3;
-}
-.input-is-returning-container>label {
-  float: left;
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .input-is-returning-container>input {
   width: 14px;
-  float: right;
-}
-.input-is-returning {
-  float: right;
-  width: 16px;
+  margin-left:1em;
 }
 
 input,
