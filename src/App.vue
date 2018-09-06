@@ -18,7 +18,7 @@
       />
     </section>
     <icon-button class="save--button" name='save' @save="savePreviewOut"/>
-    <icon-button class="io--button" name='io' type='file' @io="importFile($event)"/>
+    <!-- <icon-button class="io--button" name='io' type='file' @io="importFile($event)"/> -->
   </div>
 </template>
 
@@ -140,7 +140,7 @@ textarea {
   display: grid;
   grid-template:  "list preview" 2fr
                   "form preview" minmax(320px,1fr)
-                  / minmax(400px, 1fr) minmax(700px, 3fr);
+                  / minmax(400px, 1fr) minmax(700px, 4fr);
   font-family: 'Open Sans', sans-serif;
   height: 100vh;
   /* overflow: hidden; */
