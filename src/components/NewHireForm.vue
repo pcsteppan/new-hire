@@ -130,7 +130,6 @@ textarea{
   border: none;
   border-bottom: 1px solid #1d44d4;
   font-family: inherit;
-  font-size: 12px;
 }
 
 .input-description-container {

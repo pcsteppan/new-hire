@@ -51,13 +51,15 @@ export default {
         id: this.nextNewHireId++,
         isExpanded: false
       })
-      // this.saveAssociates()
+      this.saveLocal()
     },
     updateNewHireData ({ data: newHireData, key: index }) {
       this.newHires.splice(index, 1, { ...newHireData })
+      this.saveLocal()
     },
     removeNewHire (index) {
       this.newHires.splice(index, 1)
+      this.saveLocal()
     },
     savePreviewOut () {
       const data = document.getElementsByClassName('preview--section')[0].innerHTML
@@ -88,6 +90,10 @@ export default {
           window.URL.revokeObjectURL(url)
         }, 0)
       }
+    },
+    saveLocal () {
+      let parsed = JSON.stringify(this.newHires)
+      localStorage.setItem('newHires', parsed)
     }
     // removeAssociate (x) {
     //   this.associates.splice(x, 1);
@@ -97,6 +103,15 @@ export default {
     //   let parsed = JSON.stringify(this.associates)
     //   localStorage.setItem('associates', parsed);
     // }
+  },
+  mounted () {
+    if (localStorage.getItem('newHires')) {
+      try {
+        this.newHires = JSON.parse(localStorage.getItem('newHires'))
+      } catch (e) {
+        localStorage.removeItem('newHires')
+      }
+    }
   }
 }
 </script>
@@ -112,16 +127,22 @@ html {
   max-height: 100vh;
   max-width: 100vw;
   overflow: hidden;
+  font-size: 14px;
+}
+
+textarea {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 1rem;
 }
 
 #app {
-  font-family: 'Avenir',Helvetca, Arial, sans-serif;
+  font-family: 'Open Sans', Helvetca, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: grid;
-  grid-template:  "list preview" 1fr
-                  "form preview" 320px
-                  / 400px minmax(700px, 1fr);
+  grid-template:  "list preview" 2fr
+                  "form preview" minmax(320px,1fr)
+                  / minmax(400px, 1fr) minmax(700px, 3fr);
   font-family: 'Open Sans', sans-serif;
   height: 100vh;
   /* overflow: hidden; */

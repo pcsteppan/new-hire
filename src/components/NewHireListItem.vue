@@ -2,29 +2,31 @@
   <div>
     <div class="new-hire-li-nav" :class="{ expanded: newHire.isExpanded }">
       <div class="name">
-          <p>{{pNewHire.firstName + '&nbsp;' + pNewHire.lastName}}</p>
-        </div>
-        <div class="btns">
-          <icon-button name="edit" v-if="!newHire.isExpanded" @edit="newHire.isExpanded = true"/>
-          <icon-button name="update" v-else @update="update"/>
-          <icon-button name="remove" @remove="$emit('remove')"/>
-        </div>
+        <p>{{pNewHire.firstName + '&nbsp;' + pNewHire.lastName}}</p>
       </div>
-      <div v-if="newHire.isExpanded" class="new-hire-li-card">
-        <input v-model="newHire.firstName">
-        <input v-model="newHire.lastName">
-        <input v-model="newHire.preferredName">
-        <input v-model="newHire.title">
-        <input v-model="newHire.department">
-        <input v-model="newHire.supervisor">
-        <textarea v-model="newHire.description" rows="4" class="input-description"></textarea>
+      <div class="btns">
+        <icon-button name="edit" v-if="!newHire.isExpanded" @edit="newHire.isExpanded = true"/>
+        <icon-button name="update" v-else @update="update"/>
+        <icon-button name="cancel" v-if="newHire.isExpanded" @cancel="cancelEdit"/>
+        <icon-button name="remove" @remove="remove"/>
+      </div>
+    </div>
+    <form v-if="newHire.isExpanded" class="new-hire-li-card" v-on:submit.prevent="update">
+      <input v-model="newHire.firstName">
+      <input v-model="newHire.lastName">
+      <input v-model="newHire.preferredName">
+      <input v-model="newHire.title">
+      <input v-model="newHire.department">
+      <input v-model="newHire.supervisor">
+      <textarea v-model="newHire.description" rows="4" class="input-description"></textarea>
       <div class="input input-is-returning-container">
         <label for="input-is-returning" class="smallcaps">
         returning associate
         </label>
         <input class="input-is-returning" type="checkbox" v-model="newHire.isReturning">
       </div>
-    </div>
+      <input style="display:none;" type="submit">
+    </form>
   </div>
 </template>
 
@@ -48,10 +50,16 @@ export default {
   },
   methods: {
     remove () {
-      console.log('remove')
+      if (confirm(`Are you sure you'd like to remove ${this.pNewHire.firstName} ${this.pNewHire.lastName}?`)) {
+        this.$emit('remove')
+      }
     },
     update () {
       this.$emit('update', this.newHire)
+      this.newHire.isExpanded = false
+    },
+    cancelEdit () {
+      this.newHire = { ...this.pNewHire }
       this.newHire.isExpanded = false
     }
   }
@@ -74,8 +82,13 @@ export default {
 .new-hire-li-nav {
   box-sizing: border-box;
   border-top: 1px solid #ccc;
-  padding: 5px 25px;
-  height: 30px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1rem;
+  height: 3rem;
 }
 
 .new-hire-li-nav.expanded {
@@ -98,7 +111,7 @@ textarea {
 
 .new-hire-li-nav>.btns {
   height: 30px;
-  width: 20%;
+  width: auto;
   float: right;
   display: flex;
   justify-content: space-around;
