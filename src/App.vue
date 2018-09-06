@@ -39,26 +39,23 @@ export default {
   },
   data: function () {
     return {
-      newHires: [],
-      nextNewHireId: 1
+      newHires: []
     }
   },
   methods: {
     addNewHire (newHireData) {
       this.newHires.push({
-        ...newHireData,
-        id: this.nextNewHireId++,
-        isExpanded: false
+        ...newHireData
       })
-      this.saveLocal()
+      this.saveLocally()
     },
     updateNewHireData ({ data: newHireData, key: index }) {
       this.newHires.splice(index, 1, { ...newHireData })
-      this.saveLocal()
+      this.saveLocally()
     },
     removeNewHire (index) {
       this.newHires.splice(index, 1)
-      this.saveLocal()
+      this.saveLocally()
     },
     savePreviewOut () {
       const data = document.getElementsByClassName('preview--section')[0].innerHTML
@@ -91,7 +88,7 @@ export default {
         }, 0)
       }
     },
-    saveLocal () {
+    saveLocally () {
       let parsed = JSON.stringify(this.newHires)
       localStorage.setItem('newHires', parsed)
     },

@@ -75,7 +75,8 @@ export default {
         department: '',
         supervisor: '',
         description: '',
-        isReturning: false
+        isReturning: false,
+        isExpanded: false
       },
       newHire: {
         ...this.NEW_HIRE_TEMPLATE

@@ -5,7 +5,7 @@
         <p>{{pNewHire.firstName + '&nbsp;' + pNewHire.lastName}}</p>
       </div>
       <div class="btns">
-        <icon-button name="edit" v-if="!newHire.isExpanded" @edit="newHire.isExpanded = true"/>
+        <icon-button name="edit" v-if="!newHire.isExpanded" @edit="expand"/>
         <icon-button name="update" v-else @update="update"/>
         <icon-button name="cancel" v-if="newHire.isExpanded" @cancel="cancelEdit"/>
         <icon-button name="remove" @remove="remove"/>
@@ -55,12 +55,22 @@ export default {
       }
     },
     update () {
-      this.$emit('update', this.newHire)
       this.newHire.isExpanded = false
+      this.$emit('update', this.newHire) // This handles the local save
     },
     cancelEdit () {
       this.newHire = { ...this.pNewHire }
-      this.newHire.isExpanded = false
+      this.$emit('update', this.newHire)
+      // this.newHire.isExpanded = false
+      // this.saveLocally()
+    },
+    expand () {
+      this.newHire.isExpanded = true
+      this.$emit('update', this.newHire)
+      // this.saveLocally()
+    },
+    saveLocally () {
+      this.$emit('saveLocally')
     }
   }
 }
