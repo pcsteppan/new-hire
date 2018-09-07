@@ -11,22 +11,24 @@
         <icon-button name="remove" @remove="remove"/>
       </div>
     </div>
-    <form v-if="newHire.isExpanded" class="new-hire-li-card" v-on:submit.prevent="update">
-      <input v-model="newHire.firstName">
-      <input v-model="newHire.lastName">
-      <input v-model="newHire.preferredName">
-      <input v-model="newHire.title">
-      <input v-model="newHire.department">
-      <input v-model="newHire.supervisor">
-      <textarea v-model="newHire.description" rows="4" class="input-description"></textarea>
-      <div class="input input-is-returning-container">
-        <label for="input-is-returning" class="smallcaps">
-        returning associate
-        </label>
-        <input class="input-is-returning" type="checkbox" v-model="newHire.isReturning">
-      </div>
-      <input style="display:none;" type="submit">
-    </form>
+    <!-- <transition name="shutter"> -->
+      <form v-if="newHire.isExpanded" class="new-hire-li-card" v-on:submit.prevent="update">
+        <input v-model="newHire.firstName">
+        <input v-model="newHire.lastName">
+        <input v-model="newHire.preferredName">
+        <input v-model="newHire.title">
+        <input v-model="newHire.department">
+        <input v-model="newHire.supervisor">
+        <textarea v-model="newHire.description" rows="4" class="input-description"></textarea>
+        <div class="input input-is-returning-container">
+          <label for="input-is-returning" class="smallcaps">
+          returning associate
+          </label>
+          <input class="input-is-returning" type="checkbox" v-model="newHire.isReturning">
+        </div>
+        <input style="display:none;" type="submit">
+      </form>
+    <!-- </transition> -->
   </div>
 </template>
 
@@ -59,7 +61,7 @@ export default {
       this.$emit('update', this.newHire) // This handles the local save
     },
     cancelEdit () {
-      this.newHire = { ...this.pNewHire }
+      this.newHire.isExpanded = false
       this.$emit('update', this.newHire)
       // this.newHire.isExpanded = false
       // this.saveLocally()
@@ -87,6 +89,8 @@ export default {
   grid-template-rows: 1fr 2fr 2fr 3fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   border-left: 6px solid #1d44d4;
+  z-index: 0;
+  transform: opacity(1);
 }
 
 .new-hire-li-nav {
@@ -137,5 +141,12 @@ textarea {
 .input-is-returning-container>input {
   margin-left: 1em;
   width: 14px;
+}
+
+.shutter-enter-active, .shutter-leave-active {
+  transition: opacity .4s;
+}
+.shutter-enter, .shutter-leave-to {
+  transform: opacity(.5);
 }
 </style>
