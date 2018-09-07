@@ -4,6 +4,7 @@
       v-for="(newHire, key) in newHires"
       :key=key
       :pNewHire=newHire
+      @saveLocally="$emit('saveLocally')"
       @update="$emit('update', {data:$event, key})"
       @remove="$emit('remove', key)"
     />

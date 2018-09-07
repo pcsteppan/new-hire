@@ -17,7 +17,8 @@
         :newHires=newHires
       />
     </section>
-    <button @click="savePreviewOut"/>
+    <icon-button class="save--button" name='save' @save="savePreviewOut"/>
+    <!-- <icon-button class="io--button" name='io' type='file' @io="importFile($event)"/> -->
   </div>
 </template>
 
@@ -38,24 +39,23 @@ export default {
   },
   data: function () {
     return {
-      newHires: [],
-      nextNewHireId: 1
+      newHires: []
     }
   },
   methods: {
     addNewHire (newHireData) {
       this.newHires.push({
-        ...newHireData,
-        id: this.nextNewHireId++,
-        isExpanded: false
+        ...newHireData
       })
-      // this.saveAssociates()
+      this.saveLocally()
     },
     updateNewHireData ({ data: newHireData, key: index }) {
       this.newHires.splice(index, 1, { ...newHireData })
+      this.saveLocally()
     },
     removeNewHire (index) {
       this.newHires.splice(index, 1)
+      this.saveLocally()
     },
     savePreviewOut () {
       const data = document.getElementsByClassName('preview--section')[0].innerHTML
@@ -67,8 +67,9 @@ export default {
                               <body style="margin: 0; padding: 0; width: 100% !important;">
                                 ${data}
                               </body>
+                              <!--JSON${JSON.stringify(this.newHires)}-->
                             </html>`
-      this.saveFile(formattedData, 'newhireannouncement', 'html')
+      this.saveFile(formattedData, 'newhireannouncement.html', 'html')
     },
     saveFile (data, filename, type) {
       let file = new Blob([data], { type: type })
@@ -86,15 +87,26 @@ export default {
           window.URL.revokeObjectURL(url)
         }, 0)
       }
+    },
+    saveLocally () {
+      let parsed = JSON.stringify(this.newHires)
+      localStorage.setItem('newHires', parsed)
+    },
+    importFile (fileList) {
+      const theFileReader = new FileReader()
+      const importedFile = fileList[0]
+      const data = theFileReader.readAsText(importedFile)
+      console.log(data)
     }
-    // removeAssociate (x) {
-    //   this.associates.splice(x, 1);
-    //   this.saveAssociates();
-    // },
-    // saveAssociates() {
-    //   let parsed = JSON.stringify(this.associates)
-    //   localStorage.setItem('associates', parsed);
-    // }
+  },
+  mounted () {
+    if (localStorage.getItem('newHires')) {
+      try {
+        this.newHires = JSON.parse(localStorage.getItem('newHires'))
+      } catch (e) {
+        localStorage.removeItem('newHires')
+      }
+    }
   }
 }
 </script>
@@ -110,16 +122,22 @@ html {
   max-height: 100vh;
   max-width: 100vw;
   overflow: hidden;
+  font-size: 14px;
+}
+
+textarea {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 1rem;
 }
 
 #app {
-  font-family: 'Avenir',Helvetca, Arial, sans-serif;
+  font-family: 'Open Sans', Helvetca, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: grid;
-  grid-template:  "list preview" 1fr
-                  "form preview" 320px
-                  / 400px minmax(700px, 1fr);
+  grid-template:  "list preview" 2fr
+                  "form preview" minmax(320px,1fr)
+                  / minmax(400px, 1fr) minmax(700px, 4fr);
   font-family: 'Open Sans', sans-serif;
   height: 100vh;
   /* overflow: hidden; */
@@ -136,6 +154,25 @@ html {
 .preview--section{
   grid-area: preview;
   overflow-y: scroll;
+}
+.save--button, .io--button{
+  position: absolute;
+  top: 1em;
+  right: 2em;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: #1d44d4 1px solid;
+  fill: #1d44d4;
+  border-radius: 50%;
+}
+
+.save--button > svg, .io--button > svg {
+  width: 24px;
+  height: 24px;
+}
+
+.io--button{
+  top:4em;
 }
 
 .smallcaps {

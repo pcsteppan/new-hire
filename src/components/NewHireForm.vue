@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <form class="new-hire-form smallcaps" v-on:submit.prevent="$emit('addNewHire', newHire)">
+    <form class="new-hire-form smallcaps" v-on:submit.prevent="$emit('addNewHire', newHire); reset()">
       <div class="input">
         <label for="input-first-name">
           first name
@@ -75,7 +75,8 @@ export default {
         department: '',
         supervisor: '',
         description: '',
-        isReturning: false
+        isReturning: false,
+        isExpanded: false
       },
       newHire: {
         ...this.NEW_HIRE_TEMPLATE
@@ -109,18 +110,14 @@ export default {
   z-index: 2;
 }
 .input-is-returning-container {
-  grid-column: 3;
-}
-.input-is-returning-container>label {
-  float: left;
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .input-is-returning-container>input {
   width: 14px;
-  float: right;
-}
-.input-is-returning {
-  float: right;
-  width: 16px;
+  margin-left:1em;
 }
 
 input,
@@ -130,7 +127,6 @@ textarea{
   border: none;
   border-bottom: 1px solid #1d44d4;
   font-family: inherit;
-  font-size: 12px;
 }
 
 .input-description-container {
